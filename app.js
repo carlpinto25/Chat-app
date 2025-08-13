@@ -1,21 +1,21 @@
 const express = require('express');
 const path = require('path');
 const { createServer } = require('http');
-const { Server } = require("socket.io");
+const { Server } = require("socket.io"); 
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
-
+app.use(cors()); 
 const PORT = process.env.PORT || 4000;
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
   cors: {
-    origin: "*", 
+    origin: "https://chat-app-one-wine-im5f35u164.vercel.app", 
     methods: ["GET", "POST"]
   }
 });
+
 
 
 const buildPath = path.join(__dirname, 'dist');
