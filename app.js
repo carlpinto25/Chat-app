@@ -1,36 +1,25 @@
 const express = require('express');
 const path = require('path');
 const { createServer } = require('http');
-const { Server } = require("socket.io"); 
-const cors = require('cors');
+const { Server } = require("socket.io");
 
 const app = express();
-app.use(cors()); 
-const PORT = process.env.PORT || 4000;
 const httpServer = createServer(app);
+const PORT = process.env.PORT || 4000;
 
-const io = new Server(httpServer, {
-  cors: {
-    origin: "https://chat-app-one-wine-im5f35u164.vercel.app", 
-    methods: ["GET", "POST"]
-  }
-});
+const io = new Server(httpServer, {});
 
-
-
-const buildPath = path.join(__dirname, 'dist');
-
-
+const buildPath = path.join(__dirname, 'public'); 
 app.use(express.static(buildPath));
+
+
 app.get('*', (req, res) => {
   res.sendFile(path.join(buildPath, 'index.html'));
 });
 
 let socketsConnected = new Set();
 
-io.on('connection', onConnected);
-
-function onConnected(socket) {
+io.on('connection', (socket) => {
   console.log('Socket connected', socket.id);
   socketsConnected.add(socket.id);
   io.emit('clients-total', socketsConnected.size);
@@ -48,6 +37,6 @@ function onConnected(socket) {
   socket.on('feedback', (data) => {
     socket.broadcast.emit('feedback', data);
   });
-}
+});
 
 httpServer.listen(PORT, () => console.log(`💬 server on port ${PORT}`));

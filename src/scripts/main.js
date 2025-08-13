@@ -1,4 +1,4 @@
-const socket = io('https://chat-app-one-wine-im5f35u164.vercel.app');
+const socket = io();
 
 socket.on('connect', () => {
   console.log('SUCCESS: Socket connected to the server!', socket.id);
