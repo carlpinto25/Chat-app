@@ -9,15 +9,14 @@ const PORT = process.env.PORT || 4000;
 
 const io = new Server(httpServer, {});
 
-const buildPath = path.join(__dirname, 'public'); 
-app.use(express.static(buildPath));
-
+app.use(express.static(__dirname));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(buildPath, 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 let socketsConnected = new Set();
+
 
 io.on('connection', (socket) => {
   console.log('Socket connected', socket.id);
