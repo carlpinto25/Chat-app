@@ -1,14 +1,21 @@
 {
   "name": "my-chat-app",
-  "type": "module",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
-    "astro": "astro"
+    "start": "node app.js",
+    "server:dev": "nodemon app.js",
+    "astro:dev": "astro dev",
+    "astro:build": "astro build",
+    "astro:preview": "astro preview"
   },
   "dependencies": {
-    "astro": "^5.12.9"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "socket.io": "^4.7.5"
+  },
+  "devDependencies": {
+    "astro": "^4.11.5",
+    "nodemon": "^2.0.4"
   }
 }
