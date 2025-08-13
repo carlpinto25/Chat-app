@@ -9,14 +9,20 @@ const PORT = process.env.PORT || 4000;
 
 const io = new Server(httpServer, {});
 
-app.use(express.static(__dirname));
+// --- THE FIX IS HERE ---
+// Define the path to the 'dist' folder created by Astro's build process.
+const buildPath = path.join(__dirname, 'dist');
 
+// Tell Express to serve the static files from that 'dist' folder.
+app.use(express.static(buildPath));
+
+// For any other request, serve the index.html from inside the 'dist' folder.
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+  res.sendFile(path.join(buildPath, 'index.html'));
 });
+// --- END OF FIX ---
 
 let socketsConnected = new Set();
-
 
 io.on('connection', (socket) => {
   console.log('Socket connected', socket.id);
