@@ -6,7 +6,6 @@ const app = express();
 const httpServer = createServer(app);
 const PORT = process.env.PORT || 4000;
 
-// It's good practice to remove the trailing slash from the origin URL.
 const clientURL = "https://chat-app-frontend-kappa-black.vercel.app";
 
 const io = new Server(httpServer, {
