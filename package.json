@@ -10,8 +10,13 @@
     "astro:preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/react": "^4.3.0",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
     "socket.io": "^4.7.5"
   },
   "devDependencies": {
